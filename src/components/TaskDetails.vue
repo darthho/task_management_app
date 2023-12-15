@@ -2,7 +2,10 @@
   <div
     class="p-3 bg-white mt-4 rounded-md shadow-md flex justify-between items-center w-full"
   >
-    <h3 class="inline-block">{{ task.title }}</h3>
+    <div>
+      <h3 class="font-semibold">{{ task.title }}</h3>
+      <p class="text-xs text-gray-700">{{ task.date }}</p>
+    </div>
     <div class="icons text-right">
       <i
         class="material-icons text-base ml-2 cursor-pointer text-gray-400 hover:text-red-600"
@@ -10,7 +13,7 @@
         >delete</i
       >
       <i
-        class="material-icons text-base ml-2 cursor-pointer  hover:text-pink-500"
+        class="material-icons text-base ml-2 cursor-pointer hover:text-pink-500"
         :class="{ 'text-pink-500': task.isFav }"
         @click="taskStore.toggleFav(task.id)"
         >favorites</i

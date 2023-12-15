@@ -1,5 +1,9 @@
 <template>
-  <form action="" @submit.prevent="handleSubmit" class="flex justify-center space-x-4">
+  <form
+    action=""
+    @submit.prevent="handleSubmit"
+    class="flex justify-center space-x-4"
+  >
     <input
       type="text"
       placeholder="study?  shop??"
@@ -21,17 +25,20 @@ export default {
   setup() {
     const taskStore = useTaskStore();
     const newTask = ref("");
+    const date = ref("");
     const handleSubmit = () => {
       if (newTask.value.length > 0) {
         taskStore.addTask({
           title: newTask.value,
+          date: date.value,
           isFav: false,
           id: Math.floor(Math.random() * 10000),
         });
         newTask.value = "";
       }
+      console.log(newTask, date);
     };
-    return { handleSubmit, newTask };
+    return { handleSubmit, newTask, date };
   },
 };
 </script>

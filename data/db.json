@@ -3,12 +3,14 @@
     {
       "id": 1,
       "title": "Study Math",
-      "isFav": true
+      "isFav": true,
+      "date": "23rd May 2024"
     },
     {
-      "title": "Cook fried rice",
+      "title": "Cook Fried Rice",
       "isFav": false,
-      "id": 4
+      "id": 4,
+      "date": "23rd May 2024"
     }
   ]
 }

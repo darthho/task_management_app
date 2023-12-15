@@ -3,7 +3,7 @@
     <main class="p-6 md:py-8 md:px-8 lg:px-14 flex flex-col">
       <!-- heading -->
       <header
-        class="text-center bg-white rounded-t-2xl flex content-center items-center justify-center pt-6"
+        class="text-center bg-white rounded-2xl flex content-center items-center justify-center py-6"
       >
         <img
           src="./assets/image.png"
@@ -18,15 +18,16 @@
         </h1>
       </header>
 
-      <!-- new task form -->
-      <div class="bg-white rounded-b-2xl py-8">
-        <TaskForm />
-      </div>
-
       <!-- filter -->
       <nav class="my-4 self-end">
         <button
-          class="bg-[#ffa535] rounded-lg cursor-pointer px-3 py-2"
+          class="bg-[#ffa535] rounded-lg cursor-pointer px-4 font-black py-2"
+          @click="showFormModal = true"
+        >
+          +
+        </button>
+        <button
+          class="bg-[#ffa535] rounded-lg ml-3 cursor-pointer px-3 py-2"
           @click="filter = 'all'"
         >
           All Tasks
@@ -77,25 +78,21 @@
         <div>Project by Favour Enwonwu</div>
       </div>
     </footer>
+    <form-modal v-if="showFormModal" @close="showFormModal = false" />
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref } from "vue";
 import TaskDetails from "./components/TaskDetails.vue";
 import { useTaskStore } from "./stores/TaskStore";
-import TaskForm from "./components/TaskForm.vue";
-export default {
-  setup() {
-    const taskStore = useTaskStore();
+import FormModal from "./components/FormModal.vue";
 
-    //fetch tasks
-    taskStore.getTasks();
+// Variables
+const showFormModal = ref(false);
+const taskStore = useTaskStore();
+const filter = ref("all");
 
-    const filter = ref("all");
-    // console.log(taskStore.tasks);
-    return { taskStore, filter };
-  },
-  components: { TaskDetails, TaskForm },
-};
+// Fetch tasks
+taskStore.getTasks();
 </script>
