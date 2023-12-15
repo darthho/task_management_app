@@ -98,7 +98,16 @@
         </button>
       </form>
     </div>
-    <feedback v-if="showFeedback"/>
+    <feedback
+      v-if="showSuccessFeedback"
+      :message="'Success!!😄'"
+      :notificationType="getNotificationType('success')"
+    />
+    <feedback
+      v-if="showErrorFeedback"
+      :message="'Please fill all fields😒'"
+      :notificationType="getNotificationType('error')"
+    />
   </div>
 </template>
 
@@ -110,11 +119,22 @@ import { defineEmits } from "vue";
 const emits = defineEmits("close");
 
 const showModalPopup = ref(true);
+const showSuccessFeedback = ref(false);
+const showErrorFeedback = ref(false);
 const taskStore = useTaskStore();
 const isOpen = ref(false);
 const newTask = ref("");
 const date = ref("");
 const priority = ref("");
+
+const getNotificationType = (type) => {
+  if (type === "success") {
+    return "info"; // Pass the correct value based on your conditions
+  } else if (type === "error") {
+    return "error"; // Pass the correct value based on your conditions
+  }
+  return "";
+};
 
 const formatDate = (inputDate) => {
   const options = { day: "numeric", month: "long", year: "numeric" };
@@ -132,9 +152,11 @@ const handleSubmit = () => {
       priority: priority.value,
       id: Math.floor(Math.random() * 10000),
     });
-    console.log(4, showModalPopup.value);
+    showSuccessFeedback.value = true;
     emits("close");
     console.log(5, showModalPopup.value);
+  } else {
+    showErrorFeedback.value = true;
   }
 };
 

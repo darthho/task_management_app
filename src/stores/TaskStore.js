@@ -25,20 +25,18 @@ export const useTaskStore = defineStore("taskStore", {
         const res = await fetch("http://localhost:3000/tasks");
 
         if (!res.ok) {
+          localStorage.setItem("tasks", JSON.stringify(data));
+          const localTasks = localStorage.getItem("tasks");
+          if (localTasks) {
+            this.tasks = JSON.parse(localTasks);
+          }
           throw new Error("Failed to fetch tasks");
         }
 
         const data = await res.json();
         this.tasks = data;
-
-        localStorage.setItem("tasks", JSON.stringify(data));
       } catch (error) {
         console.error("Error fetching tasks:", error);
-
-        const localTasks = localStorage.getItem("tasks");
-        if (localTasks) {
-          this.tasks = JSON.parse(localTasks);
-        }
       } finally {
         this.isLoading = false;
       }
@@ -54,14 +52,13 @@ export const useTaskStore = defineStore("taskStore", {
         });
 
         if (!res.ok) {
+          localStorage.setItem("tasks", JSON.stringify(this.tasks));
           throw new Error("Failed to add task");
         }
 
         const data = await res.json();
         // Assuming the server responds with updated task data including an ID
         this.tasks.push(data);
-
-        localStorage.setItem("tasks", JSON.stringify(this.tasks));
       } catch (error) {
         console.error("Error adding task:", error);
       }
@@ -75,10 +72,9 @@ export const useTaskStore = defineStore("taskStore", {
         });
 
         if (!res.ok) {
+          localStorage.setItem("tasks", JSON.stringify(this.tasks));
           throw new Error("Failed to delete task");
         }
-
-        localStorage.setItem("tasks", JSON.stringify(this.tasks));
       } catch (error) {
         console.error("Error deleting task:", error);
       }
@@ -96,10 +92,9 @@ export const useTaskStore = defineStore("taskStore", {
         });
 
         if (!res.ok) {
+          localStorage.setItem("tasks", JSON.stringify(this.tasks));
           throw new Error("Failed to toggle favorite");
         }
-
-        localStorage.setItem("tasks", JSON.stringify(this.tasks));
       } catch (error) {
         console.error("Error toggling favorite:", error);
       }
@@ -117,10 +112,9 @@ export const useTaskStore = defineStore("taskStore", {
         });
 
         if (!res.ok) {
+          localStorage.setItem("tasks", JSON.stringify(this.tasks));
           throw new Error("Failed to toggle completion");
         }
-
-        localStorage.setItem("tasks", JSON.stringify(this.tasks));
       } catch (error) {
         console.error("Error toggling completion:", error);
       }

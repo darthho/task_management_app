@@ -3,8 +3,8 @@
     v-if="visible"
     :class="[
       'fixed',
-      'top-20',
-      'right-20',
+      'top-5',
+      'right-5',
       'p-2',
       'rounded',
       'text-white',
@@ -15,7 +15,16 @@
       notificationTypeClasses,
     ]"
   >
-    <div class="flex justify-between bg-green-500 px-4 rounded py-2">
+    <div
+      :class="[
+        'flex',
+        'justify-between',
+        notificationTypeClasses,
+        'px-4',
+        'rounded',
+        'py-2',
+      ]"
+    >
       <div>{{ message }}</div>
     </div>
   </div>
@@ -53,7 +62,7 @@ export default {
     notificationTypeClasses() {
       return {
         "bg-red-500": this.notificationType === "error",
-        "bg-blue-500": this.notificationType === "info",
+        "bg-green-500": this.notificationType === "info",
       };
     },
   },

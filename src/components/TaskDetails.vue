@@ -51,6 +51,7 @@ export default {
       // Implement logic to toggle task completion in taskStore based on taskId
       taskStore.toggleCompleted(taskId);
     };
+
     return { taskStore, toggleCompleted };
   },
 };

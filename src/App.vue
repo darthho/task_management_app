@@ -47,20 +47,39 @@
       >
         loading tasks...
       </div>
-
-      <!-- task list -->
-      <div class="lg:mx-40" v-if="filter === 'all'">
-        <p>You have {{ taskStore.totalCount }} tasks</p>
-        <div v-for="task in taskStore.tasks" :key="task.id">
-          <TaskDetails :task="task" />
+      <div
+        v-else
+        class="flex w-full space-x-3 self-center items-center justify-center"
+      >
+        <div class="flex space-x-2 items-center">
+          <div class="h-4 w-4 rounded-full bg-red-600"></div>
+          <p>High Priority</p>
+        </div>
+        <div class="flex space-x-2 items-center">
+          <div class="h-4 w-4 rounded-full bg-orange-600"></div>
+          <p>Mid Priority</p>
+        </div>
+        <div class="flex space-x-2 items-center">
+          <div class="h-4 w-4 rounded-full bg-green-600"></div>
+          <p>Low Priority</p>
         </div>
       </div>
 
-      <div class="lg:mx-40" v-if="filter === 'favs'">
-        <p>You have {{ taskStore.favCount }} favs</p>
-        <div v-for="task in taskStore.favs">
-          <TaskDetails :task="task" />
-        </div>
+      <!-- task list -->
+      <div class="lg:mx-40">
+        <template v-if="filter === 'all'">
+          <p>You have {{ sortedTasks.length }} tasks</p>
+          <div v-for="task in sortedTasks" :key="task.id">
+            <TaskDetails :task="task" />
+          </div>
+        </template>
+
+        <template v-if="filter === 'favs'">
+          <p>You have {{ sortedTasks.length }} favs</p>
+          <div v-for="task in sortedTasks" :key="task.id">
+            <TaskDetails :task="task" />
+          </div>
+        </template>
       </div>
 
       <button @click="taskStore.$reset" class="my-2">clear all</button>
@@ -83,7 +102,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import TaskDetails from "./components/TaskDetails.vue";
 import { useTaskStore } from "./stores/TaskStore";
 import FormModal from "./components/FormModal.vue";
@@ -103,6 +122,21 @@ const showModal = () => {
   showFormModal.value = true;
   console.log(2, showFormModal.value);
 };
+
+const sortedTasks = computed(() => {
+  if (filter.value === "all") {
+    return taskStore.tasks.slice().sort((a, b) => {
+      const priorityOrder = { High: 1, Mid: 2, Low: 3 };
+      return priorityOrder[a.priority] - priorityOrder[b.priority];
+    });
+  } else if (filter.value === "favs") {
+    return taskStore.favs.slice().sort((a, b) => {
+      const priorityOrder = { High: 1, Mid: 2, Low: 3 };
+      return priorityOrder[a.priority] - priorityOrder[b.priority];
+    });
+  }
+  return [];
+});
 
 // Fetch tasks
 taskStore.getTasks();
