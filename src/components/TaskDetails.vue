@@ -2,9 +2,18 @@
   <div
     class="p-3 bg-white mt-4 rounded-md shadow-md flex justify-between items-center w-full"
   >
-    <div>
-      <h3 class="font-semibold">{{ task.title }}</h3>
-      <p class="text-xs text-gray-700">{{ task.date }}</p>
+    <div class="flex items-center">
+      <div
+        class="w-5 h-5 mr-3 border border-gray-400 rounded-sm flex items-center justify-center cursor-pointer transition-colors duration-300 hover:border-blue-500"
+        :class="{ 'bg-[#ffa535]': task.completed }"
+        @click="toggleCompleted(task.id)"
+      >
+        <i v-if="task.completed" class="material-icons">check</i>
+      </div>
+      <div>
+        <h3 class="font-semibold capitalize">{{ task.title }}</h3>
+        <p class="text-xs text-gray-700">{{ task.date }}</p>
+      </div>
     </div>
     <div class="icons text-right">
       <i
@@ -28,7 +37,11 @@ export default {
   props: ["task"],
   setup() {
     const taskStore = useTaskStore();
-    return { taskStore };
+    const toggleCompleted = (taskId) => {
+      // Implement logic to toggle task completion in taskStore based on taskId
+      taskStore.toggleCompleted(taskId);
+    };
+    return { taskStore, toggleCompleted };
   },
 };
 </script>
