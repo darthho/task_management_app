@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="showModal"
+    v-if="showModalPopup"
     class="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex justify-center items-center z-10"
   >
     <!-- Modal content -->
@@ -98,57 +98,48 @@
         </button>
       </form>
     </div>
+    <feedback v-if="showFeedback"/>
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref } from "vue";
 import { useTaskStore } from "../stores/TaskStore";
+import Feedback from "./Feedback.vue";
+import { defineEmits } from "vue";
+const emits = defineEmits("close");
 
-export default {
-  setup() {
-    const showModal = ref(true);
-    const taskStore = useTaskStore();
-    const isOpen = ref(false);
-    const newTask = ref("");
-    const date = ref("");
-    const priority = ref("");
-    const formatDate = (inputDate) => {
-      const options = { day: "numeric", month: "long", year: "numeric" };
-      const date = new Date(inputDate);
-      return date.toLocaleDateString("en-US", options);
-    };
+const showModalPopup = ref(true);
+const taskStore = useTaskStore();
+const isOpen = ref(false);
+const newTask = ref("");
+const date = ref("");
+const priority = ref("");
 
-    // Inside your setup function
-    const handleSubmit = () => {
-      if (newTask.value.length > 0 && date.value.length > 0) {
-        const formattedDate = formatDate(date.value);
-        taskStore.addTask({
-          title: newTask.value,
-          date: formattedDate,
-          isFav: false,
-          priority: priority.value,
-          id: Math.floor(Math.random() * 10000),
-        });
-        showModal.value = false;
-      }
-      //   console.log(newTask, date);
-    };
+const formatDate = (inputDate) => {
+  const options = { day: "numeric", month: "long", year: "numeric" };
+  const date = new Date(inputDate);
+  return date.toLocaleDateString("en-US", options);
+};
 
-    const selectPriority = (selectedPriority) => {
-      priority.value = selectedPriority;
-      isOpen.value = false;
-    };
-    return {
-      showModal,
-      handleSubmit,
-      newTask,
-      date,
-      formatDate,
-      priority,
-      isOpen,
-      selectPriority,
-    };
-  },
+const handleSubmit = () => {
+  if (newTask.value.length > 0 && date.value.length > 0) {
+    const formattedDate = formatDate(date.value);
+    taskStore.addTask({
+      title: newTask.value,
+      date: formattedDate,
+      isFav: false,
+      priority: priority.value,
+      id: Math.floor(Math.random() * 10000),
+    });
+    console.log(4, showModalPopup.value);
+    emits("close");
+    console.log(5, showModalPopup.value);
+  }
+};
+
+const selectPriority = (selectedPriority) => {
+  priority.value = selectedPriority;
+  isOpen.value = false;
 };
 </script>

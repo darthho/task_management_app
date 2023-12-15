@@ -22,7 +22,7 @@
       <nav class="my-4 self-end">
         <button
           class="bg-[#ffa535] rounded-lg cursor-pointer px-4 font-black py-2"
-          @click="showFormModal = true"
+          @click="showModal"
         >
           +
         </button>
@@ -88,13 +88,21 @@ import TaskDetails from "./components/TaskDetails.vue";
 import { useTaskStore } from "./stores/TaskStore";
 import FormModal from "./components/FormModal.vue";
 
+
 // Variables
 const showFormModal = ref(false);
 const taskStore = useTaskStore();
 const filter = ref("all");
 
 const closeModal = () => {
-  showFormModal.value = false; // Reset the modal state to false when closed
+  console.log(3, showFormModal.value);
+  showFormModal.value = false;
+};
+
+const showModal = () => {
+  console.log(1, showFormModal.value);
+  showFormModal.value = true;
+  console.log(2, showFormModal.value);
 };
 
 // Fetch tasks

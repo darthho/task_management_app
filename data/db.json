@@ -4,17 +4,45 @@
       "id": 1,
       "title": "Study Math",
       "isFav": true,
-      "completed": false,
+      "completed": true,
       "priority": "High",
       "date": "May 23, 2024"
     },
     {
       "title": "Cook Fried Rice",
-      "isFav": true,
+      "isFav": false,
       "completed": true,
       "id": 4,
       "priority": "Mid",
       "date": "May 23, 2024"
+    },
+    {
+      "title": "dfghnjlmk;,.",
+      "date": "December 2, 2023",
+      "isFav": true,
+      "priority": "High",
+      "id": 4252
+    },
+    {
+      "title": "ugvbhnjmk,l",
+      "date": "December 7, 2023",
+      "isFav": false,
+      "priority": "Low",
+      "id": 963
+    },
+    {
+      "title": "sdfyvgubhinjmk,l",
+      "date": "December 2, 2023",
+      "isFav": false,
+      "priority": "High",
+      "id": 5376
+    },
+    {
+      "title": "zsfxndgcfkhvgbufgvb u",
+      "date": "December 2, 2023",
+      "isFav": false,
+      "priority": "High",
+      "id": 1592
     }
   ]
 }
