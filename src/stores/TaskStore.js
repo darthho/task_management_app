@@ -119,6 +119,26 @@ export const useTaskStore = defineStore("taskStore", {
         console.error("Error toggling completion:", error);
       }
     },
+    async reorderTasks({ newIndex, oldIndex }) {
+      try {
+        // Rearrange tasks in the local store
+        const movedTask = this.tasks.splice(oldIndex, 1)[0];
+        this.tasks.splice(newIndex, 0, movedTask);
+
+        // Assuming you want to update the backend with the new order
+        const res = await fetch("http://localhost:3000/tasks/reorder", {
+          method: "PATCH",
+          body: JSON.stringify({ newIndex, oldIndex, taskId: movedTask.id }),
+          headers: { "Content-Type": "application/json" },
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to reorder tasks");
+        }
+      } catch (error) {
+        console.error("Error reordering tasks:", error);
+      }
+    },
   },
   persist: true,
 });

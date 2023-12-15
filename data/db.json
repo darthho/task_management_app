@@ -13,7 +13,8 @@
       "date": "December 2, 2023",
       "isFav": true,
       "priority": "Mid",
-      "id": 4252
+      "id": 4252,
+      "completed": true
     },
     {
       "title": "Soar High",
@@ -28,7 +29,8 @@
       "date": "December 29, 2023",
       "isFav": false,
       "priority": "Mid",
-      "id": 5392
+      "id": 5392,
+      "completed": true
     },
     {
       "title": "dcfvgbhnjm",
@@ -50,6 +52,20 @@
       "isFav": false,
       "priority": "Mid",
       "id": 2739
+    },
+    {
+      "title": "dxhcfjvgbhjmkl",
+      "date": "December 14, 2023",
+      "isFav": false,
+      "priority": "High",
+      "id": 6763
+    },
+    {
+      "title": "efrgtnhjm",
+      "date": "December 22, 2023",
+      "isFav": false,
+      "priority": "Low",
+      "id": 6303
     }
   ]
 }

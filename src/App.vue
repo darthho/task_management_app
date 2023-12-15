@@ -111,6 +111,7 @@ import FormModal from "./components/FormModal.vue";
 const showFormModal = ref(false);
 const taskStore = useTaskStore();
 const filter = ref("all");
+const sorted = ref([]);
 
 const closeModal = () => {
   console.log(3, showFormModal.value);
@@ -125,12 +126,12 @@ const showModal = () => {
 
 const sortedTasks = computed(() => {
   if (filter.value === "all") {
-    return taskStore.tasks.slice().sort((a, b) => {
+    return [...taskStore.tasks].sort((a, b) => {
       const priorityOrder = { High: 1, Mid: 2, Low: 3 };
       return priorityOrder[a.priority] - priorityOrder[b.priority];
     });
   } else if (filter.value === "favs") {
-    return taskStore.favs.slice().sort((a, b) => {
+    return [...taskStore.favs].sort((a, b) => {
       const priorityOrder = { High: 1, Mid: 2, Low: 3 };
       return priorityOrder[a.priority] - priorityOrder[b.priority];
     });
