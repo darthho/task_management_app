@@ -11,8 +11,18 @@
         <i v-if="task.completed" class="material-icons">check</i>
       </div>
       <div>
-        <h3 class="font-semibold capitalize">{{ task.title }}</h3>
-        <p class="text-xs text-gray-700">{{ task.date }}</p>
+        <h3
+          class="font-semibold capitalize"
+          :class="{ 'line-through': task.completed }"
+        >
+          {{ task.title }}
+        </h3>
+        <p
+          class="text-xs text-gray-700"
+          :class="{ 'line-through': task.completed }"
+        >
+          {{ task.date }}
+        </p>
       </div>
     </div>
     <div class="flex items-center icons text-right">

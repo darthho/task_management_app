@@ -14,7 +14,7 @@
       "isFav": true,
       "priority": "Mid",
       "id": 4252,
-      "completed": true
+      "completed": false
     },
     {
       "title": "Soar High",
@@ -22,7 +22,7 @@
       "isFav": true,
       "priority": "Low",
       "id": 860,
-      "completed": true
+      "completed": false
     },
     {
       "title": "Jump",
@@ -30,42 +30,7 @@
       "isFav": false,
       "priority": "Mid",
       "id": 5392,
-      "completed": true
-    },
-    {
-      "title": "dcfvgbhnjm",
-      "date": "December 29, 2023",
-      "isFav": false,
-      "priority": "Low",
-      "id": 5916
-    },
-    {
-      "title": "szxdjcfvhgbnmlk,.",
-      "date": "January 6, 2024",
-      "isFav": false,
-      "priority": "High",
-      "id": 8024
-    },
-    {
-      "title": "hvjbnm,.",
-      "date": "December 27, 2023",
-      "isFav": false,
-      "priority": "Mid",
-      "id": 2739
-    },
-    {
-      "title": "dxhcfjvgbhjmkl",
-      "date": "December 14, 2023",
-      "isFav": false,
-      "priority": "High",
-      "id": 6763
-    },
-    {
-      "title": "efrgtnhjm",
-      "date": "December 22, 2023",
-      "isFav": false,
-      "priority": "Low",
-      "id": 6303
+      "completed": false
     }
   ]
 }
