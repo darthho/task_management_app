@@ -30,13 +30,13 @@
           class="bg-[#ffa535] rounded-lg ml-3 cursor-pointer px-3 py-2"
           @click="filter = 'all'"
         >
-          All Tasks
+          📜 Tasks
         </button>
         <button
           class="bg-[#ffa535] rounded-lg ml-3 cursor-pointer px-3 py-2"
           @click="filter = 'favs'"
         >
-          Fav Tasks
+          💓ed Tasks
         </button>
       </nav>
 
@@ -87,7 +87,6 @@ import { ref } from "vue";
 import TaskDetails from "./components/TaskDetails.vue";
 import { useTaskStore } from "./stores/TaskStore";
 import FormModal from "./components/FormModal.vue";
-
 
 // Variables
 const showFormModal = ref(false);

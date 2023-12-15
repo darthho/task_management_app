@@ -33,7 +33,7 @@
       >
       <i
         class="material-icons text-base ml-2 cursor-pointer hover:text-pink-500"
-        :class="{ 'text-pink-500': task.isFav }"
+        :class="{ 'text-[#F92F60]': task.isFav }"
         @click="taskStore.toggleFav(task.id)"
         >favorites</i
       >
