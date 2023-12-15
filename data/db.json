@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Study Math",
+      "isFav": true
+    },
+    {
+      "title": "Cook fried rice",
+      "isFav": false,
+      "id": 4
+    }
+  ]
+}
