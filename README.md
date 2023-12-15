@@ -1,12 +1,12 @@
 # Task Management App
 
-### To run this application locally, first clone the project and run
+### To run this application locally, first clone the project and run this
 
 ```sh
 npm install
 ```
 
-### After the downloading is done, run tis on your terminal to setup your database
+### After the downloading is done, run this on your terminal to setup your database
 
 ```sh
 json-server -w ./data/db.json
