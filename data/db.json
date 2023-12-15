@@ -5,21 +5,16 @@
       "title": "Study Math",
       "isFav": true,
       "completed": false,
-      "date": "23rd May 2024"
+      "priority": "High",
+      "date": "May 23, 2024"
     },
     {
       "title": "Cook Fried Rice",
-      "isFav": false,
-      "completed": false,
+      "isFav": true,
+      "completed": true,
       "id": 4,
-      "date": "23rd May 2024"
-    },
-    {
-      "title": "dxcfvygubhn",
-      "date": "December 30, 2023",
-      "isFav": false,
-      "id": 6529,
-      "completed": true
+      "priority": "Mid",
+      "date": "May 23, 2024"
     }
   ]
 }

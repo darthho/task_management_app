@@ -20,13 +20,22 @@ export const useTaskStore = defineStore("taskStore", {
   },
   actions: {
     async getTasks() {
-      this.isLoading = true;
-      const res = await fetch("http://localhost:3000/tasks");
-      const data = await res.json();
+      try {
+        this.isLoading = true;
+        const res = await fetch("http://localhost:3000/tasks");
+        if (!res.ok) {
+          throw new Error("Failed to fetch tasks");
+        }
+        const data = await res.json();
 
-      this.tasks = data;
-      this.isLoading = false;
+        this.tasks = data;
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      } finally {
+        this.isLoading = false;
+      }
     },
+
     async addTask(task) {
       this.tasks.push(task);
       const res = await fetch("http://localhost:3000/tasks", {
@@ -39,6 +48,7 @@ export const useTaskStore = defineStore("taskStore", {
         console.log(res.error);
       }
     },
+
     async deleteTask(id) {
       this.tasks = this.tasks.filter((task) => {
         return task.id !== id;
@@ -55,7 +65,7 @@ export const useTaskStore = defineStore("taskStore", {
       const task = this.tasks.find((t) => t.id === id);
       task.isFav = !task.isFav;
 
-      const res = await res.fetch("http://localhost:3000/tasks/" + id, {
+      const res = await fetch("http://localhost:3000/tasks/" + id, {
         method: "PATCH",
         body: JSON.stringify({ isFav: task.isFav }),
         headers: { "Content-Type": "application/json" },
@@ -65,6 +75,7 @@ export const useTaskStore = defineStore("taskStore", {
         console.log(res.error);
       }
     },
+
     async toggleCompleted(id) {
       const task = this.tasks.find((t) => t.id === id);
       task.completed = !task.completed;

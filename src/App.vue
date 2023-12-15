@@ -3,7 +3,7 @@
     <main class="p-6 md:py-8 md:px-8 lg:px-14 flex flex-col">
       <!-- heading -->
       <header
-        class="text-center bg-white rounded-2xl flex content-center items-center justify-center py-6"
+        class="text-center bg-white rounded-2xl flex content-center items-center justify-center p-6"
       >
         <img
           src="./assets/image.png"
@@ -51,7 +51,7 @@
       <!-- task list -->
       <div class="lg:mx-40" v-if="filter === 'all'">
         <p>You have {{ taskStore.totalCount }} tasks</p>
-        <div v-for="task in taskStore.tasks">
+        <div v-for="task in taskStore.tasks" :key="task.id">
           <TaskDetails :task="task" />
         </div>
       </div>
@@ -65,7 +65,7 @@
 
       <button @click="taskStore.$reset" class="my-2">clear all</button>
     </main>
-    <footer class="bg-white">
+    <!-- <footer class="bg-white">
       <hr />
       <div class="flex justify-between px-6 md:px-8 lg:px-14 py-2">
         <div>
@@ -77,8 +77,8 @@
         </div>
         <div>Project by Favour Enwonwu</div>
       </div>
-    </footer>
-    <form-modal v-if="showFormModal" @close="showFormModal = false" />
+    </footer> -->
+    <form-modal v-if="showFormModal" @close="closeModal" />
   </div>
 </template>
 
@@ -92,6 +92,10 @@ import FormModal from "./components/FormModal.vue";
 const showFormModal = ref(false);
 const taskStore = useTaskStore();
 const filter = ref("all");
+
+const closeModal = () => {
+  showFormModal.value = false; // Reset the modal state to false when closed
+};
 
 // Fetch tasks
 taskStore.getTasks();

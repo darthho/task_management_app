@@ -15,7 +15,17 @@
         <p class="text-xs text-gray-700">{{ task.date }}</p>
       </div>
     </div>
-    <div class="icons text-right">
+    <div class="flex items-center icons text-right">
+      <div
+        class="h-4 w-4 rounded-full"
+        :class="{
+          'bg-red-600': task.priority === 'High',
+          'bg-orange-600': task.priority === 'Mid',
+          'bg-green-600': task.priority === 'Low',
+        }"
+      >
+        <!-- Content -->
+      </div>
       <i
         class="material-icons text-base ml-2 cursor-pointer text-gray-400 hover:text-red-600"
         @click="taskStore.deleteTask(task.id)"

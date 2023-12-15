@@ -34,7 +34,64 @@
           />
         </div>
 
+        <div class="relative flex flex-col">
+          <label class="mb-2 font-medium text-lg">Priority</label>
+          <div class="relative inline-block">
+            <input
+              type="text"
+              v-model="priority"
+              @click="isOpen = !isOpen"
+              readonly
+              class="border border-[#ffa535] rounded-lg px-3 py-3 cursor-pointer w-full"
+            />
+            <div class="absolute right-3 -mt-7">
+              <svg
+                class="fill-current w-4 h-4"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10 12l-5-5 1.5-1.5L10 9.002l3.5-3.5L15 7z"
+                  fill="currentColor"
+                  class="transform transition-transform"
+                  :class="{ 'rotate-180': isOpen }"
+                ></path>
+              </svg>
+            </div>
+
+            <div
+              v-show="isOpen"
+              class="absolute top-10 z-10 bg-white border border-[#ffa535] rounded-lg py-1 px-3 mt-1 shadow-md w-full"
+            >
+              <div class="py-1">
+                <input
+                  type="text"
+                  @click="selectPriority('High')"
+                  class="hover:bg-[#ffa535] cursor-pointer px-2 py-1 w-full border-none outline-none"
+                  value="High"
+                  readonly
+                />
+                <input
+                  type="text"
+                  @click="selectPriority('Mid')"
+                  class="hover:bg-[#ffa535] cursor-pointer px-2 py-1 w-full border-none outline-none"
+                  value="Mid"
+                  readonly
+                />
+                <input
+                  type="text"
+                  @click="selectPriority('Low')"
+                  class="hover:bg-[#ffa535] cursor-pointer px-2 py-1 w-full border-none outline-none"
+                  value="Low"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
         <button
+          type="submit"
           class="bg-[#ffa535] rounded-lg cursor-pointer font-bold w-full py-3"
         >
           Add
@@ -52,8 +109,10 @@ export default {
   setup() {
     const showModal = ref(true);
     const taskStore = useTaskStore();
+    const isOpen = ref(false);
     const newTask = ref("");
     const date = ref("");
+    const priority = ref("");
     const formatDate = (inputDate) => {
       const options = { day: "numeric", month: "long", year: "numeric" };
       const date = new Date(inputDate);
@@ -68,17 +127,28 @@ export default {
           title: newTask.value,
           date: formattedDate,
           isFav: false,
+          priority: priority.value,
           id: Math.floor(Math.random() * 10000),
         });
-        newTask.value = "";
-        date.value = ""; 
         showModal.value = false;
       }
-    //   console.log(newTask, date);
+      //   console.log(newTask, date);
     };
 
-    // Return formattedDate alongside other variables
-    return { showModal, handleSubmit, newTask, date, formatDate };
+    const selectPriority = (selectedPriority) => {
+      priority.value = selectedPriority;
+      isOpen.value = false;
+    };
+    return {
+      showModal,
+      handleSubmit,
+      newTask,
+      date,
+      formatDate,
+      priority,
+      isOpen,
+      selectPriority,
+    };
   },
 };
 </script>
