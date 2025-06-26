@@ -3,7 +3,7 @@
 ### To run this application locally, first clone the project and run this
 
 ```sh
-npm install
+    npm install
 ```
 
 ### After the downloading is done, run this on your terminal to setup your database
